@@ -283,3 +283,5 @@ const keysArray = [
     key: 'ControlRight',
   },
 ];
+
+export default keysArray;
