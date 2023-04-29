@@ -1,4 +1,4 @@
-const keysArray = [
+export const keysArray = [
   {
     valueRu: 'ё',
     valueEng: '`',
@@ -283,5 +283,3 @@ const keysArray = [
     key: 'ControlRight',
   },
 ];
-
-export default keysArray;

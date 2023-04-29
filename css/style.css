@@ -1,1 +1,64 @@
-/*# sourceMappingURL=style.css.map */
+*,
+::after,
+::before {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 900px;
+}
+.wrapper__title {
+  font-size: 40px;
+  margin: 15px auto 15px;
+  color: white;
+  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
+.wrapper__textarea {
+  max-width: 800px;
+  width: 100%;
+  overflow: auto;
+  height: 200px;
+  padding: 15px;
+  font-size: 1.5rem;
+  border-radius: 10px;
+  border: 2px solid black;
+  box-shadow: 2px 2px 5px #7c7b7b;
+  margin: 0 auto 10px;
+}
+.wrapper__textarea:focus {
+  box-shadow: 0px 2px 5px #2d475d;
+  border: 2px solid #6987a0;
+  outline: none;
+}
+
+.keyboard {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+  border: 3px solid #6987a0;
+  padding: 5px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px #2d475d;
+}
+.keyboard__button {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px #2d475d;
+  font-size: 1rem;
+  margin: 3px;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+}
+.keyboard__button:hover {
+  background-color: #7a95aa;
+  color: aliceblue;
+}/*# sourceMappingURL=style.css.map */
