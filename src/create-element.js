@@ -27,6 +27,7 @@ export const createElementKeyboard = () => {
     } else {
       button.textContent = item.valueRu || item.value;
     }
+    button.setAttribute('id', item.key);
     button.classList.add('keyboard__button');
     keyboard.appendChild(button);
   });

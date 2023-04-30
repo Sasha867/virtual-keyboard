@@ -138,7 +138,11 @@ export const keysArray = [
     key: 'Backslash',
   },
   {
-    value: 'Caps lock',
+    value: 'Del',
+    key: 'Delete',
+  },
+  {
+    value: 'Caps Lock',
     key: 'CapsLock',
   },
   {
@@ -255,6 +259,10 @@ export const keysArray = [
     key: 'Slash',
   },
   {
+    value: '▲',
+    key: 'ArrowUp',
+  },
+  {
     value: 'Shift',
     key: 'ShiftRight',
   },
@@ -277,6 +285,18 @@ export const keysArray = [
   {
     value: 'Alt',
     key: 'AltRight',
+  },
+  {
+    value: '◄',
+    key: 'ArrowLeft',
+  },
+  {
+    value: '▼',
+    key: 'ArrowDown',
+  },
+  {
+    value: '►',
+    key: 'ArrowRight',
   },
   {
     value: 'Ctrl',
