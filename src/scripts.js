@@ -1,37 +1,103 @@
 import { createElementKeyboard, createElementPage } from './create-element.js';
-import { keysArray } from './keys-array.js';
 
 createElementPage();
 createElementKeyboard();
-const textarea = document.querySelector('textarea');
+export const textarea = document.querySelector('textarea');
+export const buttonArray = document.querySelectorAll('.keyboard__button');
+const capsLockState = true;
 
 export const addTextInTextarea = (text) => {
-  const newValue = textarea.value.substring(0, textarea.selectionStart)
-    + text
-    + textarea.value.substring(textarea.selectionStart, textarea.value.length);
-  textarea.value = newValue;
+  const cursorPosition = textarea.selectionStart;
+  if (text === 'backspace') {
+    const textBefore = textarea.value.substring(0, cursorPosition - 1);
+    const textAfter = textarea.value.substring(cursorPosition);
+    textarea.value = textBefore + textAfter;
+    textarea.setSelectionRange(
+      cursorPosition > 0 ? cursorPosition - 1 : cursorPosition,
+      cursorPosition > 0 ? cursorPosition - 1 : cursorPosition,
+    );
+    return;
+  }
+  textarea.value = textarea.value.substring(0, cursorPosition)
+      + text
+      + textarea.value.substring(textarea.selectionEnd, textarea.value.length);
+  textarea.selectionEnd = cursorPosition + text.length;
 };
 
-window.addEventListener('click', ({ target }) => {
-  console.log(target.id);
-  keysArray.forEach((item) => {
-    if (
-      item.valueRu === target.textContent
-      || item.valueEng === target.textContent
-      || item.value === target.textContent
-      || item.specialValue === target.textContent
-    ) {
-      addTextInTextarea(target.textContent);
+export const activeButtons = (keyCode) => {
+  textarea.focus();
+  const button = document.getElementById(keyCode);
+  if (keyCode !== 'CapsLock' && button) button.classList.add('active');
+  if (keyCode === 'Enter') {
+    addTextInTextarea('\n');
+    return;
+  }
+  if (keyCode === 'Space') {
+    addTextInTextarea(' ');
+    return;
+  }
+  if (keyCode === 'Tab') {
+    addTextInTextarea('\t');
+    return;
+  }
+  if (
+    keyCode === 'AltLeft'
+    || keyCode === 'AltRight'
+    || keyCode === 'ControlLeft'
+    || keyCode === 'ControlRight'
+  ) {
+    return;
+  }
+  if (keyCode === 'Backspace') {
+    addTextInTextarea('backspace');
+    return;
+  }
+  if (keyCode === 'CapsLock') {
+    if (button.classList.contains('active')) {
+      button.classList.remove('active');
+    } else {
+      button.classList.add('active');
+    }
+    capslockMode();
+    return;
+  }
+  if (keyCode === 'ShiftLeft' || keyCode === 'ShiftRight') {
+    if (capsLockState) {
+      buttonsValueToLowercase();
+    }else{
+        buttonsValueToUppercase();
+    }
+  }
+  buttonArray.forEach((item) => {
+    if (keyCode === item.id) {
+      addTextInTextarea(button.textContent);
     }
   });
+};
+window.addEventListener('mousedown', (e) => {
+  activeButtons(e.target.id);
+});
+
+window.addEventListener('mouseup', (e) => {
+  textarea.focus();
+  if (e.target.id === 'CapsLock') {
+    e.stopPropagation();
+  } else if (e.target.id) {
+    setTimeout(() => {
+      document.getElementById(e.target.id).classList.remove('active');
+    }, 100);
+  }
 });
 
 document.addEventListener('keydown', (e) => {
-  console.log(e.code);
-  document.getElementById(e.code).classList.add('active');
-  textarea.focus();
+  e.preventDefault();
+  activeButtons(e.code);
 });
 
 document.addEventListener('keyup', (e) => {
-  document.getElementById(e.code).classList.remove('active');
+  if (e.code === 'CapsLock') {
+    e.stopPropagation();
+  } else {
+    document.getElementById(e.code).classList.remove('active');
+  }
 });

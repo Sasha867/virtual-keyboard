@@ -22,7 +22,7 @@ export const createElementPage = () => {
 };
 
 let currentLanguage = 'eng';
-console.log(currentLanguage = 23);
+// console.log(currentLanguage = 23);
 
 export const createElementKeyboard = () => {
   const keyboard = document.getElementsByClassName('keyboard')[0];

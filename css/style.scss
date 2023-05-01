@@ -18,7 +18,8 @@
     font-size: 40px;
     margin: 15px auto 15px;
     color: white;
-    text-shadow: 1px 1px 2px black, 0 0 25px rgb(82, 82, 238), 0 0 5px rgb(124, 124, 212);
+    text-shadow: 1px 1px 2px black, 0 0 25px rgb(82, 82, 238),
+      0 0 5px rgb(124, 124, 212);
   }
 
   &__textarea {
@@ -68,18 +69,14 @@
     position: relative;
     transition-duration: 0.2s;
     &:hover {
-      background-color: #7a95aa;
+      background-color: #899fb1;
       color: aliceblue;
-    }
-    &:active {
-      transform: translateY(2px);
-      box-shadow: none;
     }
   }
 }
 
 .active {
-  background-color: #7a95aa;
+  background-color: #1a5481 !important;
   transform: translateY(3px);
   color: aliceblue;
   box-shadow: none;

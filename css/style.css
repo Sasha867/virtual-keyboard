@@ -68,16 +68,12 @@
   transition-duration: 0.2s;
 }
 .keyboard__button:hover {
-  background-color: #7a95aa;
+  background-color: #899fb1;
   color: aliceblue;
-}
-.keyboard__button:active {
-  transform: translateY(2px);
-  box-shadow: none;
 }
 
 .active {
-  background-color: #7a95aa;
+  background-color: #1a5481 !important;
   transform: translateY(3px);
   color: aliceblue;
   box-shadow: none;
