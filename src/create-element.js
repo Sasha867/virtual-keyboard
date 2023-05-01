@@ -14,9 +14,15 @@ export const createElementPage = () => {
   const keyboard = document.createElement('div');
   keyboard.classList.add('keyboard');
   textarea.after(keyboard);
+  const description = document.createElement('p');
+  description.textContent = 'Клавиатура создана в операционной системе Window.'
+    + ' Для переключения языка комбинацию: левые alt + ctrl.';
+  description.classList.add('wrapper__description');
+  keyboard.after(description);
 };
 
-const currentLanguage = 'eng';
+let currentLanguage = 'eng';
+console.log(currentLanguage = 23);
 
 export const createElementKeyboard = () => {
   const keyboard = document.getElementsByClassName('keyboard')[0];
