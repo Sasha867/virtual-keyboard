@@ -125,16 +125,19 @@ export const keysArray = [
   {
     valueRu: 'х',
     valueEng: '[',
+    specialValue: '{',
     key: 'BracketLeft',
   },
   {
     valueRu: 'ъ',
     valueEng: ']',
+    specialValue: '}',
     key: 'BracketRight',
   },
   {
     valueRu: '\\',
     valueEng: '/',
+    specialValue: '|',
     key: 'Backslash',
   },
   {
@@ -193,11 +196,13 @@ export const keysArray = [
   {
     valueRu: 'ж',
     valueEng: ';',
+    specialValue: ':',
     key: 'Semicolon',
   },
   {
     valueRu: 'э',
     valueEng: "'",
+    specialValue: '"',
     key: 'Quote',
   },
   {
@@ -246,16 +251,19 @@ export const keysArray = [
   {
     valueRu: 'б',
     valueEng: ',',
+    specialValue: '<',
     key: 'Comma',
   },
   {
     valueRu: 'ю',
     valueEng: '.',
+    specialValue: '>',
     key: 'Period',
   },
   {
     valueRu: '.',
     valueEng: '/',
+    specialValue: '?',
     key: 'Slash',
   },
   {
@@ -303,3 +311,5 @@ export const keysArray = [
     key: 'ControlRight',
   },
 ];
+
+export default keysArray;

@@ -3,6 +3,7 @@ import { keysArray } from './keys-array.js';
 
 createElementPage();
 createElementKeyboard();
+
 export const textarea = document.querySelector('textarea');
 export const buttonArray = document.querySelectorAll('.keyboard__button');
 let capsLockState = true;
@@ -28,31 +29,21 @@ export const addTextInTextarea = (text) => {
 export const buttonsValueToUppercase = () => {
   keysArray.forEach((item) => {
     const buttons = document.getElementById(item.key);
-    console.log(buttons);
-    if (item.specialValue) {
-      buttons.textContent = item.specialValue;
-    } else {
-      buttons.textContent = buttons.textContent.toLowerCase();
-    }
+    if (item.valueRu || item.valueEng) { buttons.textContent = buttons.textContent.toLowerCase(); }
   });
 };
 
 function buttonsValueToLowercase() {
   keysArray.forEach((item) => {
     const buttons = document.getElementById(item.key);
-    if (item.specialValue) {
-      buttons.textContent = item.specialValue;
-    } else {
-      buttons.textContent = buttons.textContent.toUpperCase();
-    }
+
+    if (item.valueRu || item.valueEng) { buttons.textContent = buttons.textContent.toUpperCase(); }
   });
 }
 
 export const capslockMode = () => {
   capsLockState = !capsLockState;
-  console.log(capsLockState);
   if (capsLockState) {
-    console.log('hi');
     buttonsValueToUppercase();
   } else {
     buttonsValueToLowercase();
@@ -102,6 +93,13 @@ export const activeButtons = (keyCode) => {
     } else {
       buttonsValueToUppercase();
     }
+    return;
+  }
+  if (keyCode === 'Delete') {
+    return;
+  }
+  if (keyCode === 'MetaLeft') {
+    return;
   }
   buttonArray.forEach((item) => {
     if (keyCode === item.id) {
@@ -109,6 +107,7 @@ export const activeButtons = (keyCode) => {
     }
   });
 };
+
 window.addEventListener('mousedown', (e) => {
   activeButtons(e.target.id);
 });

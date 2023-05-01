@@ -15,13 +15,13 @@ export const createElementPage = () => {
   keyboard.classList.add('keyboard');
   textarea.after(keyboard);
   const description = document.createElement('p');
-  description.textContent = 'Клавиатура создана в операционной системе Window.'
-    + ' Для переключения языка комбинацию: левые alt + ctrl.';
+  description.textContent = 'Клавиатура создана в операционной системе Window.';
+  // + ' Для переключения языка комбинацию: левые alt + ctrl.';
   description.classList.add('wrapper__description');
   keyboard.after(description);
 };
 
-let currentLanguage = 'eng';
+const currentLanguage = 'eng';
 // console.log(currentLanguage = 23);
 
 export const createElementKeyboard = () => {
