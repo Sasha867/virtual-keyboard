@@ -1,10 +1,11 @@
 import { createElementKeyboard, createElementPage } from './create-element.js';
+import { keysArray } from './keys-array.js';
 
 createElementPage();
 createElementKeyboard();
 export const textarea = document.querySelector('textarea');
 export const buttonArray = document.querySelectorAll('.keyboard__button');
-const capsLockState = true;
+let capsLockState = true;
 
 export const addTextInTextarea = (text) => {
   const cursorPosition = textarea.selectionStart;
@@ -19,9 +20,43 @@ export const addTextInTextarea = (text) => {
     return;
   }
   textarea.value = textarea.value.substring(0, cursorPosition)
-      + text
-      + textarea.value.substring(textarea.selectionEnd, textarea.value.length);
+    + text
+    + textarea.value.substring(textarea.selectionEnd, textarea.value.length);
   textarea.selectionEnd = cursorPosition + text.length;
+};
+
+export const buttonsValueToUppercase = () => {
+  keysArray.forEach((item) => {
+    const buttons = document.getElementById(item.key);
+    console.log(buttons);
+    if (item.specialValue) {
+      buttons.textContent = item.specialValue;
+    } else {
+      buttons.textContent = buttons.textContent.toLowerCase();
+    }
+  });
+};
+
+function buttonsValueToLowercase() {
+  keysArray.forEach((item) => {
+    const buttons = document.getElementById(item.key);
+    if (item.specialValue) {
+      buttons.textContent = item.specialValue;
+    } else {
+      buttons.textContent = buttons.textContent.toUpperCase();
+    }
+  });
+}
+
+export const capslockMode = () => {
+  capsLockState = !capsLockState;
+  console.log(capsLockState);
+  if (capsLockState) {
+    console.log('hi');
+    buttonsValueToUppercase();
+  } else {
+    buttonsValueToLowercase();
+  }
 };
 
 export const activeButtons = (keyCode) => {
@@ -64,8 +99,8 @@ export const activeButtons = (keyCode) => {
   if (keyCode === 'ShiftLeft' || keyCode === 'ShiftRight') {
     if (capsLockState) {
       buttonsValueToLowercase();
-    }else{
-        buttonsValueToUppercase();
+    } else {
+      buttonsValueToUppercase();
     }
   }
   buttonArray.forEach((item) => {
