@@ -21,8 +21,7 @@ export const createElementPage = () => {
   keyboard.after(description);
 };
 
-const currentLanguage = 'eng';
-// console.log(currentLanguage = 23);
+export const currentLanguage = 'eng';
 
 export const createElementKeyboard = () => {
   const keyboard = document.getElementsByClassName('keyboard')[0];
