@@ -1,4 +1,8 @@
-import { createElementKeyboard, createElementPage } from './create-element.js';
+import {
+  createElementKeyboard,
+  createElementPage,
+  currentLanguage,
+} from './create-element.js';
 import { keysArray } from './keys-array.js';
 
 createElementPage();
@@ -26,27 +30,44 @@ export const addTextInTextarea = (text) => {
   textarea.selectionEnd = cursorPosition + text.length;
 };
 
-export const buttonsValueToUppercase = () => {
+export const buttonsValueToUppercase = (keyCode) => {
   keysArray.forEach((item) => {
     const buttons = document.getElementById(item.key);
-    if (item.valueRu || item.valueEng) { buttons.textContent = buttons.textContent.toLowerCase(); }
+    if (item.valueRu || item.valueEng) {
+      buttons.textContent = buttons.textContent.toUpperCase();
+    }
+    if (keyCode === 'ShiftLeft' || keyCode === 'ShiftRight') {
+      if (item.specialValue) {
+        buttons.textContent = item.specialValue;
+      }
+    }
   });
 };
 
-function buttonsValueToLowercase() {
+function buttonsValueToLowercase(keyCode) {
   keysArray.forEach((item) => {
     const buttons = document.getElementById(item.key);
-
-    if (item.valueRu || item.valueEng) { buttons.textContent = buttons.textContent.toUpperCase(); }
+    if (item.valueRu || item.valueEng) {
+      buttons.textContent = buttons.textContent.toLowerCase();
+    }
+    if (keyCode === 'ShiftLeft' || keyCode === 'ShiftRight') {
+      if (item.specialValue) {
+        if (currentLanguage === 'eng') {
+          buttons.textContent = item.valueEng || item.value;
+        } else {
+          buttons.textContent = item.valueRu || item.value;
+        }
+      }
+    }
   });
 }
 
 export const capslockMode = () => {
   capsLockState = !capsLockState;
   if (capsLockState) {
-    buttonsValueToUppercase();
-  } else {
     buttonsValueToLowercase();
+  } else {
+    buttonsValueToUppercase();
   }
 };
 
@@ -89,10 +110,11 @@ export const activeButtons = (keyCode) => {
   }
   if (keyCode === 'ShiftLeft' || keyCode === 'ShiftRight') {
     if (capsLockState) {
-      buttonsValueToLowercase();
-    } else {
       buttonsValueToUppercase();
+    } else {
+      buttonsValueToLowercase();
     }
+    // buttonsValueToUppercase(keyCode);
     return;
   }
   if (keyCode === 'Delete') {
@@ -109,6 +131,9 @@ export const activeButtons = (keyCode) => {
 };
 
 window.addEventListener('mousedown', (e) => {
+  if (e.target.id === 'ShiftLeft' || e.target.id === 'ShiftRight') {
+    buttonsValueToUppercase(e.target.id);
+  }
   activeButtons(e.target.id);
 });
 
@@ -121,9 +146,15 @@ window.addEventListener('mouseup', (e) => {
       document.getElementById(e.target.id).classList.remove('active');
     }, 100);
   }
+  if (e.target.id === 'ShiftLeft' || e.target.id === 'ShiftRight') {
+    buttonsValueToLowercase(e.target.id);
+  }
 });
 
 document.addEventListener('keydown', (e) => {
+  if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
+    buttonsValueToUppercase(e.code);
+  }
   e.preventDefault();
   activeButtons(e.code);
 });
@@ -133,5 +164,8 @@ document.addEventListener('keyup', (e) => {
     e.stopPropagation();
   } else {
     document.getElementById(e.code).classList.remove('active');
+  }
+  if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
+    buttonsValueToLowercase(e.code);
   }
 });

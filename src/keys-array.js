@@ -2,6 +2,7 @@ export const keysArray = [
   {
     valueRu: 'ё',
     valueEng: '`',
+    specialValue: '~',
     key: 'Backquote',
   },
   {
@@ -287,7 +288,7 @@ export const keysArray = [
     key: 'AltLeft',
   },
   {
-    value: 'Space',
+    value: '',
     key: 'Space',
   },
   {
