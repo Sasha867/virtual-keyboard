@@ -23,11 +23,12 @@ export const createElementPage = () => {
 };
 
 export const currentLanguage = {
-  language: 'eng' || 'ru',
+  language: localStorage.getItem('language') || 'eng',
 };
 
 export const toggleLanguage = () => {
   currentLanguage.language = currentLanguage.language === 'eng' ? 'ru' : 'eng';
+  localStorage.setItem('language', currentLanguage.language);
 };
 
 export const createElementKeyboard = () => {

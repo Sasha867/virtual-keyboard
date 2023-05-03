@@ -39,8 +39,12 @@ export const buttonsValueToUppercase = (keyCode) => {
       buttons.textContent = buttons.textContent.toUpperCase();
     }
     if (keyCode === 'ShiftLeft' || keyCode === 'ShiftRight') {
-      if (item.specialValue) {
-        buttons.textContent = item.specialValue;
+      if (currentLanguage.language === 'eng') {
+        if (item.specialValueEng) {
+          buttons.textContent = item.specialValueEng;
+        }
+      } else if (item.specialValueRu) {
+        buttons.textContent = item.specialValueRu;
       }
     }
   });
@@ -53,12 +57,12 @@ function buttonsValueToLowercase(keyCode) {
       buttons.textContent = buttons.textContent.toLowerCase();
     }
     if (keyCode === 'ShiftLeft' || keyCode === 'ShiftRight') {
-      if (item.specialValue) {
-        if (currentLanguage.language === 'eng') {
+      if (currentLanguage.language === 'eng') {
+        if (item.specialValueEng) {
           buttons.textContent = item.valueEng || item.value;
-        } else {
-          buttons.textContent = item.valueRu || item.value;
         }
+      } else if (item.specialValueRu) {
+        buttons.textContent = item.valueRu || item.value;
       }
     }
   });
