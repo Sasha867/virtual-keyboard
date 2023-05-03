@@ -1,7 +1,9 @@
 import {
+  checkLanguage,
   createElementKeyboard,
   createElementPage,
   currentLanguage,
+  toggleLanguage,
 } from './create-element.js';
 import { keysArray } from './keys-array.js';
 
@@ -37,8 +39,12 @@ export const buttonsValueToUppercase = (keyCode) => {
       buttons.textContent = buttons.textContent.toUpperCase();
     }
     if (keyCode === 'ShiftLeft' || keyCode === 'ShiftRight') {
-      if (item.specialValue) {
-        buttons.textContent = item.specialValue;
+      if (currentLanguage.language === 'eng') {
+        if (item.specialValueEng) {
+          buttons.textContent = item.specialValueEng;
+        }
+      } else if (item.specialValueRu) {
+        buttons.textContent = item.specialValueRu;
       }
     }
   });
@@ -51,12 +57,12 @@ function buttonsValueToLowercase(keyCode) {
       buttons.textContent = buttons.textContent.toLowerCase();
     }
     if (keyCode === 'ShiftLeft' || keyCode === 'ShiftRight') {
-      if (item.specialValue) {
-        if (currentLanguage === 'eng') {
+      if (currentLanguage.language === 'eng') {
+        if (item.specialValueEng) {
           buttons.textContent = item.valueEng || item.value;
-        } else {
-          buttons.textContent = item.valueRu || item.value;
         }
+      } else if (item.specialValueRu) {
+        buttons.textContent = item.valueRu || item.value;
       }
     }
   });
@@ -157,6 +163,15 @@ document.addEventListener('keydown', (e) => {
   }
   e.preventDefault();
   activeButtons(e.code);
+  if (
+    document.getElementById('AltLeft').classList.contains('active')
+    && document.getElementById('ControlLeft').classList.contains('active')
+  ) {
+    if (!e.repeat) {
+      toggleLanguage();
+      checkLanguage();
+    }
+  }
 });
 
 document.addEventListener('keyup', (e) => {
