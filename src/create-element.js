@@ -1,4 +1,5 @@
 import { keysArray } from './keys-array.js';
+// import { currentLanguage } from './scripts.js';
 
 export const createElementPage = () => {
   const wrapper = document.createElement('div');
@@ -15,19 +16,25 @@ export const createElementPage = () => {
   keyboard.classList.add('keyboard');
   textarea.after(keyboard);
   const description = document.createElement('p');
-  description.textContent = 'Клавиатура создана в операционной системе Window.';
-  // + ' Для переключения языка комбинацию: левые alt + ctrl.';
+  description.textContent = 'Клавиатура создана в операционной системе Window.'
+  + ' Для переключения языка комбинацию: левые alt + ctrl.';
   description.classList.add('wrapper__description');
   keyboard.after(description);
 };
 
-export const currentLanguage = 'eng';
+export const currentLanguage = {
+  language: 'eng' || 'ru',
+};
+
+export const toggleLanguage = () => {
+  currentLanguage.language = currentLanguage.language === 'eng' ? 'ru' : 'eng';
+};
 
 export const createElementKeyboard = () => {
   const keyboard = document.getElementsByClassName('keyboard')[0];
   keysArray.forEach((item) => {
     const button = document.createElement('button');
-    if (currentLanguage === 'eng') {
+    if (currentLanguage.language === 'eng') {
       button.textContent = item.valueEng || item.value;
     } else {
       button.textContent = item.valueRu || item.value;
@@ -35,5 +42,16 @@ export const createElementKeyboard = () => {
     button.setAttribute('id', item.key);
     button.classList.add('keyboard__button');
     keyboard.appendChild(button);
+  });
+};
+
+export const checkLanguage = () => {
+  keysArray.forEach((item) => {
+    const buttons = document.getElementById(item.key);
+    if (currentLanguage.language === 'eng') {
+      buttons.textContent = item.valueEng || item.value;
+    } else {
+      buttons.textContent = item.valueRu || item.value;
+    }
   });
 };

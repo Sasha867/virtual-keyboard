@@ -1,7 +1,9 @@
 import {
+  checkLanguage,
   createElementKeyboard,
   createElementPage,
   currentLanguage,
+  toggleLanguage,
 } from './create-element.js';
 import { keysArray } from './keys-array.js';
 
@@ -52,7 +54,7 @@ function buttonsValueToLowercase(keyCode) {
     }
     if (keyCode === 'ShiftLeft' || keyCode === 'ShiftRight') {
       if (item.specialValue) {
-        if (currentLanguage === 'eng') {
+        if (currentLanguage.language === 'eng') {
           buttons.textContent = item.valueEng || item.value;
         } else {
           buttons.textContent = item.valueRu || item.value;
@@ -157,6 +159,15 @@ document.addEventListener('keydown', (e) => {
   }
   e.preventDefault();
   activeButtons(e.code);
+  if (
+    document.getElementById('AltLeft').classList.contains('active')
+    && document.getElementById('ControlLeft').classList.contains('active')
+  ) {
+    if (!e.repeat) {
+      toggleLanguage();
+      checkLanguage();
+    }
+  }
 });
 
 document.addEventListener('keyup', (e) => {
